@@ -1,7 +1,7 @@
-package com.nguyen.springbootdocker.controller;
+package com.nguyen.controller;
 
-import com.nguyen.springbootdocker.dto.AppException;
-import com.nguyen.springbootdocker.dto.MessageCode;
+import com.nguyen.dto.AppException;
+import com.nguyen.dto.MessageCode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

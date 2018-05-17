@@ -1,7 +1,7 @@
-package com.nguyen.springbootdocker.utils;
+package com.nguyen.utils;
 
 import com.alibaba.fastjson.JSON;
-import com.nguyen.springbootdocker.rabbitmq.provider.RabbitConnectionFactory;
+import com.nguyen.rabbitmq.provider.RabbitConnectionFactory;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

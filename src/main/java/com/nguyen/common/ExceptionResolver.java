@@ -1,6 +1,6 @@
-package com.nguyen.springbootdocker.common;
+package com.nguyen.common;
 
-import com.nguyen.springbootdocker.dto.AppException;
+import com.nguyen.dto.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;

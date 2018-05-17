@@ -1,4 +1,4 @@
-package com.nguyen.springbootdocker.controller;
+package com.nguyen.controller;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;

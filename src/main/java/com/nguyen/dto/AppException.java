@@ -1,4 +1,4 @@
-package com.nguyen.springbootdocker.dto;
+package com.nguyen.dto;
 
 /**
  * @author RWM

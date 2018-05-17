@@ -1,4 +1,4 @@
-package com.nguyen.springbootdocker.rabbitmq.provider;
+package com.nguyen.rabbitmq.provider;
 
 public interface RabbitMessageHandler {
     default byte[] handle(String contentType, byte[] body){

@@ -1,4 +1,4 @@
-package com.nguyen.springbootdocker.sort;
+package com.nguyen.sort;
 
 import com.google.common.collect.Lists;
 

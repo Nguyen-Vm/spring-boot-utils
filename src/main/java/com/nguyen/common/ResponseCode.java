@@ -1,4 +1,4 @@
-package com.nguyen.springbootdocker.common;
+package com.nguyen.common;
 
 public enum ResponseCode {
 

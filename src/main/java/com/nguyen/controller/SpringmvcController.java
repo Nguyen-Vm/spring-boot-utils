@@ -1,4 +1,4 @@
-package com.nguyen.springbootdocker.controller;
+package com.nguyen.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

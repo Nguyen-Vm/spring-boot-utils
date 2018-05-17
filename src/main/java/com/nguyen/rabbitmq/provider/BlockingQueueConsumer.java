@@ -1,4 +1,4 @@
-package com.nguyen.springbootdocker.rabbitmq.provider;
+package com.nguyen.rabbitmq.provider;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
