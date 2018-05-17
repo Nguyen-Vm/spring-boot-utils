@@ -1,4 +1,4 @@
-package com.nguyen.springbootdocker.provider.rabbitmq;
+package com.nguyen.springbootdocker.rabbitmq.provider;
 
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -22,7 +22,7 @@ public final class RabbitConnectionFactory {
 			factory.setNetworkRecoveryInterval(ConnectionFactory.DEFAULT_SHUTDOWN_TIMEOUT/2);
 			return factory.newConnection();
 		} catch (Exception e) {
-			throw new RuntimeException("create connection rabbitmq uri: " + mqUri, e);
+			throw new RuntimeException("create connection provider uri: " + mqUri, e);
 		}
 	}
 }

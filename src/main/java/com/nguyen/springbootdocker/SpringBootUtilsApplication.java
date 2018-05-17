@@ -9,13 +9,13 @@ import org.springframework.core.env.Environment;
 
 @Slf4j
 @SpringBootApplication
-public class SpringBootDockerApplication implements CommandLineRunner {
+public class SpringBootUtilsApplication implements CommandLineRunner {
 
     @Autowired
     private Environment env;
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootDockerApplication.class, args);
+		SpringApplication.run(SpringBootUtilsApplication.class, args);
 	}
 
 	@Override

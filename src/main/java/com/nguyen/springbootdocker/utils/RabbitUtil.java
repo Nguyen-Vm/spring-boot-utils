@@ -1,7 +1,7 @@
 package com.nguyen.springbootdocker.utils;
 
 import com.alibaba.fastjson.JSON;
-import com.nguyen.springbootdocker.provider.rabbitmq.RabbitConnectionFactory;
+import com.nguyen.springbootdocker.rabbitmq.provider.RabbitConnectionFactory;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -38,7 +38,7 @@ public class RabbitUtil {
             senderChannel.exchangeDeclare(exchange,"direct", true);
             senderChannel.basicPublish(exchange, routingKey, null, JSON.toJSONBytes(object));
         } catch (IOException e) {
-            log.error("rabbitmq produce direct msg error.....", e);
+            log.error("provider produce direct msg error.....", e);
         }
     }
 
@@ -77,7 +77,7 @@ public class RabbitUtil {
             senderChannel.exchangeDeclare(exchange,"fanout",true);
             senderChannel.basicPublish(exchange,"", null, JSON.toJSONBytes(object));
         } catch (IOException e) {
-            log.error("rabbitmq publish direct msg error.....", e);
+            log.error("provider publish direct msg error.....", e);
         }
     }
 
