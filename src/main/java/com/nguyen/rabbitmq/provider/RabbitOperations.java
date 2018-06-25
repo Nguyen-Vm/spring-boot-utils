@@ -10,6 +10,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Delivery;
 import com.rabbitmq.client.Envelope;
+import com.rabbitmq.client.ShutdownSignalException;
 import org.apache.commons.lang3.StringUtils;
 import org.nguyen.foun.utils.DateUtils;
 import org.slf4j.Logger;
@@ -38,6 +39,11 @@ public class RabbitOperations {
         this.channel = connection.createChannel();
     }
 
+    /**
+     * 消息生产者
+     * @param topic
+     * @param message
+     */
     public void producer(Enum topic, Object message) {
         try {
             AMQP.BasicProperties props = propertyOf(message, true);
@@ -48,6 +54,12 @@ public class RabbitOperations {
         }
     }
 
+    /**
+     * 消息消费者
+     * @param topic
+     * @param autoAck
+     * @param messageHandler
+     */
     public void consumer(Enum topic, boolean autoAck, RabbitMessageHandler messageHandler) {
         Executors.newSingleThreadExecutor(ThreadFactoryHelper.threadFactoryOf(topic.name())).submit(() -> {
             while (true) {
@@ -64,12 +76,16 @@ public class RabbitOperations {
                     // 消费出现异常
                     if (null != consumingLoop(consumer)) {
                         closeConsumer(topic, consumer);
+                        LOG.error("rabbit consumer topic: {} about {}s to retry", topic, ConnectionFactory.DEFAULT_HANDSHAKE_TIMEOUT);
+                        Thread.sleep(ConnectionFactory.DEFAULT_HANDSHAKE_TIMEOUT);
                     }
+                } catch (InterruptedException ie) {
+                    continue;
                 } catch (Exception e) {
-                    LOG.error("rabbit consumer topic: %s error %s", topic, e);
+                    LOG.error("rabbit consumer topic: {} error %s", topic, e);
                     try {
                         Thread.sleep(ConnectionFactory.DEFAULT_HANDSHAKE_TIMEOUT);
-                    }catch (InterruptedException ie) {
+                    } catch (InterruptedException ie) {
                         continue;
                     }
                 }
@@ -78,11 +94,11 @@ public class RabbitOperations {
     }
 
     private void closeConsumer(Enum topic, BlockingQueueConsumer consumer) {
-        if(null != consumer && null != consumer.getChannel()) {
+        if (null != consumer && null != consumer.getChannel()) {
             try {
                 consumer.getChannel().basicCancel(consumer.getConsumerTag());
-            }catch (Exception e) {
-                if(LOG.isDebugEnabled()) {
+            } catch (Exception e) {
+                if (LOG.isDebugEnabled()) {
                     LOG.debug("rabbit topic: %s consumer close error %s", topic, e);
                 }
             }
@@ -114,7 +130,8 @@ public class RabbitOperations {
     }
 
     private volatile boolean consumingLoop = true;
-    private Exception consumingLoop(BlockingQueueConsumer consumer) {
+
+    private Exception consumingLoop(BlockingQueueConsumer consumer) throws IOException {
         try {
             while (consumingLoop) {
                 try {
@@ -124,8 +141,8 @@ public class RabbitOperations {
                 }
             }
             return null;
-        } catch (Exception e) {
-            return e;
+        } catch (ShutdownSignalException sse) {
+            return sse;
         }
     }
 
