@@ -9,9 +9,7 @@ import com.rabbitmq.client.ConnectionFactory;
  */
 public final class RabbitConnection {
 
-    private RabbitConnection() {
-
-    }
+    private RabbitConnection() {}
 
     public static synchronized Connection create(String mqUri) {
         try {

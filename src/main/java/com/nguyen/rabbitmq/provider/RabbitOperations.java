@@ -41,6 +41,7 @@ public class RabbitOperations {
 
     /**
      * 消息生产者
+     *
      * @param topic
      * @param message
      */
@@ -56,6 +57,7 @@ public class RabbitOperations {
 
     /**
      * 消息消费者
+     *
      * @param topic
      * @param autoAck
      * @param messageHandler
