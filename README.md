@@ -9,3 +9,5 @@ freemarker，thymeleaf，velocity模板引擎;
 RabbitMQ;
 
 对象集合多字段排序；
+
+.conf文件读取工具包

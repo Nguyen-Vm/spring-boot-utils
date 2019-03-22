@@ -12,11 +12,11 @@ import com.rabbitmq.client.Delivery;
 import com.rabbitmq.client.Envelope;
 import com.rabbitmq.client.ShutdownSignalException;
 import org.apache.commons.lang3.StringUtils;
-import org.nguyen.foun.utils.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentMap;
@@ -117,7 +117,7 @@ public class RabbitOperations {
                 .Builder()
                 .contentType(getContentType(message))
                 .deliveryMode(durable ? 2 : 1)
-                .timestamp(DateUtils.now())
+                .timestamp(new Date())
                 .build();
     }
 
